@@ -1,7 +1,7 @@
 import React from 'react'
 import { VideoPlayer } from './VideoPlayer'
 import { VideoDescription } from './VideoDescription'
-import { RelatedVideos } from '../relatedVideos/relatedVideos'
+import { RelatedVideos } from '../relatedVideos/RelatedVideos'
 
 export const Details = () => {
   return (
@@ -13,8 +13,8 @@ export const Details = () => {
                         <VideoDescription/>
                   </div>
                   <RelatedVideos/>
-                </div>
-            </div>
+              </div>
+          </div>
         </section>
   )
 }

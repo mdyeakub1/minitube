@@ -1,12 +1,15 @@
 import React from 'react'
+import likeIcon from '../../assets/like.svg'
+import unLike from '../../assets/unlike.svg'
 
-export const VideoDescription = () => {
+export const VideoDescription = ({ video }) => {
+    const {title, date,likes, unlikes, description } = video
   return (
     <div>
                             <h1
                                 className="text-lg font-semibold tracking-tight text-slate-800"
                             >
-                                Some video title
+                                {title}
                             </h1>
                             <div
                                 className="pb-4 flex items-center space-between border-b"
@@ -14,7 +17,7 @@ export const VideoDescription = () => {
                                 <h2
                                     className="text-sm leading-[1.7142857] text-slate-600 w-full"
                                 >
-                                    Uploaded on 23 Nov 2022
+                                    {date}
                                 </h2>
 
                                 <div className="flex gap-10 w-48">
@@ -22,28 +25,28 @@ export const VideoDescription = () => {
                                         <div className="shrink-0">
                                             <img
                                                 className="w-5 block"
-                                                src="./assets/like.svg"
+                                                src={likeIcon}
                                                 alt="Like"
                                             />
                                         </div>
                                         <div
                                             className="text-sm leading-[1.7142857] text-slate-600"
                                         >
-                                            100K
+                          { likes}K
                                         </div>
                                     </div>
                                     <div className="flex gap-1">
                                         <div className="shrink-0">
                                             <img
                                                 className="w-5 block"
-                                                src="./assets/unlike.svg"
+                                                src={unLike}
                                                 alt="Unlike"
                                             />
                                         </div>
                                         <div
                                             className="text-sm leading-[1.7142857] text-slate-600"
                                         >
-                                            100K
+                                            {unlikes}K
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +55,7 @@ export const VideoDescription = () => {
                             <div
                                 className="mt-4 text-sm text-[#334155] dark:text-slate-400"
                             >
-                                Some video description here
+                                {description}
                             </div>
                         </div>
   )

@@ -1,12 +1,14 @@
 import React from 'react'
 
-export const VideoPlayer = () => {
+export const VideoPlayer = ({video}) => {
+  console.log(video)
+  const { title, link} = video
   return (
     <iframe
                             width="100%"
                             className="aspect-video"
-                            src="https://www.youtube-nocookie.com/embed/6O4s7v28nlw"
-                            title="Some video title"
+                            src={link}
+                            title={title}
                             frameborder=""
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen

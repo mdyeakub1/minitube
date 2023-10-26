@@ -9,13 +9,13 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/home' element={<Home/>} />
-          <Route path='/video' element={<Video/>} />
+          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/videos/:videoId' element={<Video />} />
         </Routes>
 
       </BrowserRouter>
-      
+
     </div>
   );
 }

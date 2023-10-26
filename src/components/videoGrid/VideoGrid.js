@@ -1,66 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { VideoGridItem } from './VideoGridItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchVideos } from '../../redux/features/videos/videosSlice'
+import { Loading } from '../Ui/Loading'
+import { Error } from '../Ui/Error'
+
 
 export const VideoGrid = () => {
-  return (
-    <section className="pt-12">
-    <section className="pt-12">
-        <div
-            className="grid grid-cols-12 gap-4 max-w-7xl mx-auto px-5 lg:px-0 min-h-[300px]"
-        >
-            <div
-                className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]"
-            >
-                <div className="w-full flex flex-col">
-                    <div className="relative">
-                        <a href="video.html">
-                            <img
-                                src="https://i3.ytimg.com/vi/6O4s7v28nlw/maxresdefault.jpg"
-                                className="w-full h-auto"
-                                alt="Some video title"
-                            />
-                        </a>
+    const dispatch = useDispatch()
+    const { videos, isLoading, isError, error } = useSelector((state) => state.videos)
+    console.log(videos)
 
-                        <p
-                            className="absolute right-2 bottom-2 bg-gray-900 text-gray-100 text-xs px-1 py"
-                        >
-                            12:10
-                        </p>
-                    </div>
+    useEffect(() => {
+        dispatch(fetchVideos())
+    }, [dispatch])
 
-                    <div className="flex flex-row mt-2 gap-2">
-                        <a href="" className="shrink-0">
-                            <img
-                                src="https://avatars.githubusercontent.com/u/73503432?v=4"
-                                className="rounded-full h-6 w-6"
-                                alt="Learn with Sumit"
-                            />
-                        </a>
+    let content;
 
-                        <div clas="flex flex-col">
-                            <a href="video.html">
-                                <p
-                                    className="text-slate-900 text-sm font-semibold"
-                                >
-                                    Video title
-                                </p>
-                            </a>
-                            <a
-                                className="text-gray-400 text-xs mt-2 hover:text-gray-600"
-                                href="#"
-                            >
-                                Learn with Sumit
-                            </a>
-                            <p className="text-gray-400 text-xs mt-1">
-                                200 views . May 3, 2022
-                            </p>
-                        </div>
-                    </div>
+    if (isLoading) {
+        content = <Loading />
+    }
+    if (!isLoading && isError) {
+        content = <Error >{error}</Error>
+    }
+    if (!isLoading && !isError && videos.length === 0) {
+        content = <Error >Video not found!</Error>
+    }
+    if (!isLoading && !isError && videos.length > 0) {
+        content = videos.map(video => (
+            <VideoGridItem key={video.id} video={video} />
+        ))
+    }
+
+
+    return (
+        <section className="pt-12">
+            <section className="pt-12">
+                <div
+                    className="grid grid-cols-12 gap-4 max-w-7xl mx-auto px-5 lg:px-0 min-h-[300px]"
+                >
+                    {content}
                 </div>
-            </div>
-
-            <div className="col-span-12">some error happened</div>
-        </div>
-    </section>
-</section>
-  )
+            </section>
+        </section>
+    )
 }
